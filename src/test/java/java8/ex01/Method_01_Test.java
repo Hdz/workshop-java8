@@ -18,11 +18,11 @@ public class Method_01_Test {
     interface IDao {
         List<Person> findAll();
 
-        default int sumAge(List<Person> people) {
+        default int sumAge() {
 
             int sumAge = 0;
 
-            for(Person p : people) {
+            for(Person p : findAll()) {
                 sumAge += p.getAge();
             }
             return sumAge;
@@ -62,7 +62,7 @@ public class Method_01_Test {
         DaoA daoA = new DaoA();
 
         // TODO invoquer la méthode sumAge pour que le test soit passant
-        int result = daoA.sumAge(daoA.findAll());     
+        int result = daoA.sumAge();     
         assertThat(result, is(210));
     }
 
@@ -70,7 +70,7 @@ public class Method_01_Test {
     public void test_daoB_sumAge() throws Exception {
 
         DaoB daoB = new DaoB();
-        int result = daoB.sumAge(daoB.findAll());
+        int result = daoB.sumAge();
 
         
         assertThat(result, is(5050));
