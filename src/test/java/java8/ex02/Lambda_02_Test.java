@@ -25,6 +25,7 @@ public class Lambda_02_Test {
     // tag::map[]
     private List<Account> map(List<Person> personList, PersonToAccountMapper mapper) {
         // TODO implémenter la méthode
+    	
         return null;
     }
     // end::map[]
