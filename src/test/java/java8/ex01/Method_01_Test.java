@@ -18,7 +18,9 @@ public class Method_01_Test {
     interface IDao {
         List<Person> findAll();
 
-        // TODO créer une méthode int sumAge()
+        int sumAge(List<Person> people);
+
+		// TODO créer une méthode int sumAge()
         // TODO Cette méthode retourne le résultat de l'addition des ages des personnes
     }
     // end::IDao[]
@@ -31,6 +33,16 @@ public class Method_01_Test {
         public List<Person> findAll() {
             return people;
         }
+
+		@Override
+		public int sumAge(List<Person> people) {
+			int sumAge =0;
+			for (Person p : people) {
+				int age =+ p.getAge();
+
+			}
+			return sumAge;
+		}
     }
 
     class DaoB implements IDao {
@@ -41,6 +53,19 @@ public class Method_01_Test {
         public List<Person> findAll() {
             return people;
         }
+
+		@Override
+		public int sumAge(List<Person> people) {
+			int sumAge =0;
+			for (Person p : people) {
+				int age =+ p.getAge();
+
+			}
+			return sumAge;
+		}
+
+		
+		
     }
 
     @Test
