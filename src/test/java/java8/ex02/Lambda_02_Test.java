@@ -3,6 +3,7 @@ package java8.ex02;
 import java8.data.Account;
 import java8.data.Data;
 import java8.data.Person;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -25,9 +26,15 @@ public class Lambda_02_Test {
     // tag::map[]
     private List<Account> map(List<Person> personList, PersonToAccountMapper mapper) {
         // TODO implémenter la méthode
-    	
-        return null;
+    	List<Account> res = new ArrayList<>();
+    	for(Person p : personList ) {
+    		res.add(mapper.map(p));
+    		
+    	}
+		return res;
     }
+
+
     // end::map[]
 
 
@@ -36,11 +43,23 @@ public class Lambda_02_Test {
     public void test_map_person_to_account() throws Exception {
 
         List<Person> personList = Data.buildPersonList(100);
+        PersonToAccountMapper mapper = new PersonToAccountMapper() {
+        	Account a = new Account();
+        	public Account map(Person p) {
+        		a.setOwner(p);
+        		a.setBalance(100);
+                return a;
+
+        	}
+        };
 
         // TODO transformer la liste de personnes en liste de comptes
         // TODO tous les objets comptes ont un solde à 100 par défaut
-        List<Account> result = map(personList, null);
+        
+        
+        List<Account> result = map(personList, mapper);
 
+        
         assertThat(result, hasSize(personList.size()));
         assertThat(result, everyItem(hasProperty("balance", is(100))));
         assertThat(result, everyItem(hasProperty("owner", notNullValue())));
@@ -54,7 +73,25 @@ public class Lambda_02_Test {
         List<Person> personList = Data.buildPersonList(100);
 
         // TODO transformer la liste de personnes en liste de prénoms
-        List<String> result = null;
+        
+        PersonToAccountMapper mapper = new PersonToAccountMapper() {
+        	public Account map(Person p) {
+        		
+        		Account a = new Account ();
+        		a.setBalance(100);
+        		a.setOwner(p);
+        		return a;
+
+        	}
+        };
+        List<Account> resultTemp = map(personList, mapper);
+        
+        List<String> result = new ArrayList <> ();
+        
+        for (Account a : resultTemp)
+        {
+        	result.add(a.getOwner().getFirstname());
+        }
 
         assertThat(result, hasSize(personList.size()));
         assertThat(result, everyItem(instanceOf(String.class)));
