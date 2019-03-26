@@ -33,7 +33,9 @@ public class Function_04_Test {
     // tag::adult[]
     // TODO Compléter la fonction
     // TODO AGE >=18
-    Predicate<Person> adult = null;
+    Predicate<Person> adult = -> {
+    		//NON FINI
+    };
     // end::adult[]
 
     @Test
@@ -42,7 +44,7 @@ public class Function_04_Test {
         List<Person> personList = Data.buildPersonList();
 
         // TODO invoquer la méthode filter pour que le test soit passant
-        List<Person> result = null;
+        List<Person> result = personList;
 
         assertThat(result,  hasSize(4));
 
